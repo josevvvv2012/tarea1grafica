@@ -44,7 +44,7 @@ public class DibujaFormas2D implements InterfazGraficos2D {
         frame.add("Center", lienzo);
 
         frame.add("South", new PanelControles(this));
-        frame.setSize(new java.awt.Dimension(Constantes.tamanoImagenY,
+        frame.setSize(new java.awt.Dimension(Constantes.tamanoImagenX,
                                              Constantes.tamanoImagenY + margenY));
 
         VentanaCierre vc = new VentanaCierre();
