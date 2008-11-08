@@ -7,6 +7,6 @@ package uach.info265.tarea1grafica;
  *
  */
 public final class Constantes {
-    public static int tamanoImagenX = 640;
-    public static int tamanoImagenY = 480;
+    public static int tamanoImagenX = 800;
+    public static int tamanoImagenY = 600;
 }
