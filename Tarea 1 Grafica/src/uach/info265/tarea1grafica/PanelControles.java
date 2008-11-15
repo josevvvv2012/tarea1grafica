@@ -1,5 +1,7 @@
 package uach.info265.tarea1grafica;
 
+import java.awt.GridLayout;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -37,7 +39,9 @@ public class PanelControles extends JPanel {
      * @param instancia Instancia de objeto para gráficos.
      */
     public PanelControles(InterfazGraficos2D instancia) {
-
+    	
+    	//setLayout(new GridLayout(3,2));
+    	
         graficos = instancia;
 
         SpinnerModel spinnerModelX0 = new SpinnerNumberModel(valorDefecto,
@@ -80,7 +84,6 @@ public class PanelControles extends JPanel {
         add(jspX1);
         add(jspY1);
         add(boton);
-
         aplicarAntialias = new JCheckBox("Anti alias");
         add(aplicarAntialias);
     }
