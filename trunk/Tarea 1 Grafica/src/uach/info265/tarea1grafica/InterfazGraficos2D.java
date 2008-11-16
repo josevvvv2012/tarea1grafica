@@ -20,19 +20,6 @@ public interface InterfazGraficos2D {
      */
     void generarPunto(final int posicionX, final int posicionY);
 
-    /**
-     * Dibuja un segmento de recta sobre una imagen.
-     *
-     * @param x0 Coordenada inicial en x del segmento.
-     * @param y0 Coordenada inicial en y del segmento.
-     * @param x1 Coordenada final en x del segmento.
-     * @param y1 Coordenada final en y del segmento.
-     */
-    void generaSegmentoRecta(final int x0,
-                             final int y0,
-                             final int x1,
-                             final int y1);
-
 
     /**
      * Dibuja un segmento de recta sobre una imagen,
