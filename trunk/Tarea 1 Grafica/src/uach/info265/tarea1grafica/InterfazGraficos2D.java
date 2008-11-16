@@ -1,5 +1,7 @@
 package uach.info265.tarea1grafica;
 
+import java.util.ArrayList;
+
 /**
  * Clase de interfaz para graficar en 2D.
  *
@@ -38,7 +40,7 @@ public interface InterfazGraficos2D {
                                       final boolean aplicarAntiAlias);
 
     
-    void dibujaSegmentoAlgoritmoUno(final int x0,
+    /*void dibujaSegmentoAlgoritmoUno(final int x0,
             						final int y0,
             						final int x1,
             						final int y1,
@@ -48,5 +50,7 @@ public interface InterfazGraficos2D {
             						final int y0,
             						final int x1,
             						final int y1,
-            						final boolean aplicarAntiAlias);
+            						final boolean aplicarAntiAlias);*/
+    
+    void dibujaPoligono(int nlados, float tamanoLado);
 }

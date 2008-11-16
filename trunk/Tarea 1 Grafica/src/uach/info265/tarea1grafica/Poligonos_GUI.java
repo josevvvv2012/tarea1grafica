@@ -45,6 +45,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 	private JLabel aboutVersionLabel = null;
 	private JSplitPane jSplitPane = null;  //  @jve:decl-index=0:visual-constraint="8,681"
 	private JPanel jPanel = null;
+	private Object[] poly = null;
 
     /** Imagen a la cual se accede para dibujar. */
     private BufferedImage imagen = null;
@@ -68,6 +69,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 			jFrame = new JFrame();
 			jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			jFrame.setBounds(new Rectangle(0, 0, 1200, 780));
+			jFrame.setResizable(false);
 			jFrame.setJMenuBar(getJJMenuBar());
 			jFrame.setContentPane(getJSplitPane());
 			jFrame.setTitle("Tarea 1 Grafica");
@@ -89,6 +91,22 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 		}
 		return jJMenuBar;
 	}
+	
+	
+	/**
+	 * This method initializes jJMenuBar	
+	 * 	
+	 * @return javax.swing.JMenuBar	
+	 */
+	private Object[] getPoly(){
+		if (poly == null) {
+			poly = new Object[]{"Triangulo","Cuadrado","Pentágono","Hexágono","Heptágono","Octógono","Eneágono","Decágono"};
+		}
+		return poly;
+	}
+	
+	
+	
 
 	/**
 	 * This method initializes jMenu	
@@ -394,15 +412,53 @@ public class Poligonos_GUI implements InterfazGraficos2D{
         WritableRaster wr = imagen.getRaster();
         int[] coloresRGB = new int[3];
         coloresRGB[0] = 255;
-        // TODO 2 Implemente el algoritmo de Bresenham. Considere todos los casos posibles con respecto a pendientes y coordenadas de extremos.
 
-        ArrayList < int[] > listaPuntos = new ArrayList < int[] >();
-
-        // TODO 2.5 Definir y almacenar puntos del segmento en un arreglo.
-        int[] puntoInicial = new int[2];
-        puntoInicial[0] = -1;
-        puntoInicial[1] = -1;
-        listaPuntos.add(puntoInicial);
+        ArrayList <int[]> listaPuntos = new ArrayList <int[]>();
+        
+        int ax = x0;
+        int ay = y0;
+        int bx = x1;
+        int by = y1;
+        
+        int dx = x1-x0;
+        int dy = y1-y0;
+        
+        
+        if(Math.abs(dx) > Math.abs(dy)){ //pendiente <1
+        	float m = (float) dy/(float) dx;
+        	float b = ay - m*ax;
+        	if(dx<0)
+        		dx = -1;
+        	else
+        		dx = 1;
+        	while(ax != bx){
+        		ax += dx;
+        		ay = Math.round(m*ax + b);
+        		wr.setPixel(ax,ay,coloresRGB);
+        		int[] punto = new int[2];
+                punto[0] = ax;
+                punto[1] = ay;
+                listaPuntos.add(punto);
+        	}
+        }else{
+        	if(dy !=0){
+        		float m = (float) dx/(float) dy;
+        		float b = ax-m*ay;
+        		if(dy<0)
+        			dy =-1;
+        		else
+        			dy = 1;
+        		while(ay != by){
+        			ay += dy;
+        			ax=Math.round(m*ay+b);
+        			wr.setPixel(ax,ay,coloresRGB);
+        			int[] punto = new int[2];
+                    punto[0] = ax;
+                    punto[1] = ay;
+                    listaPuntos.add(punto);
+        		}
+        	}
+        }
 
         if (aplicarAntiAlias) {
             aplicarAntialiasSegmento(listaPuntos);
@@ -410,7 +466,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
         refrescarImagen();
     }
     
-    public void dibujaSegmentoAlgoritmoUno(final int x0,
+    /*public void dibujaSegmentoAlgoritmoUno(final int x0,
             final int y0,
             final int x1,
             final int y1,
@@ -486,48 +542,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
             aplicarAntialiasSegmento(listaPuntos);
         }
         refrescarImagen();	
-    }
-    
-    public void dibujaSegmentoAlgoritmoDos(final int x0,
-            								final int y0,
-								            final int x1,
-								            final int y1,
-								            final boolean aplicarAntiAlias) {
-    	//DDA
-    	System.out.println("generarRectaDDA: desde ["
-                + x0 + "," + y0 + "] hasta [" + x1 + "," + y1 + "]");
-    	WritableRaster wr = imagen.getRaster();
-        int[] coloresRGB = new int[3];
-        coloresRGB[0] = 255;
-        ArrayList < int[] > listaPuntos = new ArrayList < int[] >();
-        
-        int i;
-        int yi = y0;
-        int yf = -(x1-x0);
-        int mi = (y1-y0)/(x1-x0);
-        int mf = 2*((y1-y0)%(x1-x0));
-        int z = -2*(x1-x0);
-        for (i=x0;i<=x1;i++){
-        	wr.setPixel(i, yi, coloresRGB);
-        	int[] punto = new int[2];
-	        punto[0] = i;
-	        punto[1] = yi;
-	        listaPuntos.add(punto);
-	        yi = yi + mi;
-	        yf = yf + mf;
-	        if(yf > 0){
-	        	yf += z;
-	        	yi++;
-	        }
-	        	
-        }
-        
-        if (aplicarAntiAlias) {
-            aplicarAntialiasSegmento(listaPuntos);
-        }
-        refrescarImagen();
-    	
-    }
+    }*/
     
     
     /**
@@ -568,7 +583,12 @@ public class Poligonos_GUI implements InterfazGraficos2D{
         }
     }
 
-
+    public void dibujaPoligono(int nlados, float tamanoLado){
+    	//TODO 5 implementar el dibujo de poligonos en general.
+    	
+    }
+    
+    
 	/**
 	 * This method initializes jComboBox	
 	 * 	
@@ -576,7 +596,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 	 */
 	private JComboBox getJComboBox() {
 		if (jComboBox == null) {
-			jComboBox = new JComboBox();
+			jComboBox = new JComboBox(getPoly());
 			jComboBox.setBounds(new Rectangle(8, 30, 200, 25));
 		}
 		return jComboBox;
@@ -605,6 +625,36 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 			jButton = new JButton();
 			jButton.setBounds(new Rectangle(157, 63, 100, 25));
 			jButton.setText("Dibujar");
+			jButton.addActionListener(new java.awt.event.ActionListener() {
+				public void actionPerformed(java.awt.event.ActionEvent e) {
+					String poligono = jComboBox.getSelectedItem().toString();
+					float tamanoLado = Float.parseFloat(jTextField.getText());
+					if(poligono == "Triangulo"){
+						dibujaPoligono(3, tamanoLado);
+					}
+					if(poligono == "Cuadrado"){
+						dibujaPoligono(4, tamanoLado);					
+					}
+					if(poligono == "Pentágono"){
+						dibujaPoligono(5, tamanoLado);
+					}
+					if(poligono == "Hexágono"){
+						dibujaPoligono(6, tamanoLado);
+					}
+					if(poligono == "Heptágono"){
+						dibujaPoligono(7, tamanoLado);
+					}
+					if(poligono == "Octógono"){
+						dibujaPoligono(8, tamanoLado);
+					}
+					if(poligono == "Eneágono"){
+						dibujaPoligono(9, tamanoLado);
+					}
+					if(poligono == "Decágono"){
+						dibujaPoligono(10, tamanoLado);
+					}
+				}
+			});
 		}
 		return jButton;
 	}
