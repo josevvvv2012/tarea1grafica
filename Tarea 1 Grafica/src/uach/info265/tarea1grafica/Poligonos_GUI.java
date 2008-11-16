@@ -23,6 +23,9 @@ import java.awt.Rectangle;
 import javax.swing.JSplitPane;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class Poligonos_GUI implements InterfazGraficos2D{
 
@@ -37,7 +40,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 	private JMenuItem copyMenuItem = null;
 	private JMenuItem pasteMenuItem = null;
 	private JMenuItem saveMenuItem = null;
-	private JDialog aboutDialog = null;
+	private JDialog aboutDialog = null;  //  @jve:decl-index=0:visual-constraint="11,423"
 	private JPanel aboutContentPane = null;
 	private JLabel aboutVersionLabel = null;
 	private JSplitPane jSplitPane = null;  //  @jve:decl-index=0:visual-constraint="8,681"
@@ -48,6 +51,11 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 
     /** Instancia del lienzo para dibujo. */
     private CanvasPix lienzo = null;
+	private JComboBox jComboBox = null;
+	private JLabel jLabel = null;
+	private JLabel jLabel1 = null;
+	private JTextField jTextField = null;
+	private JButton jButton = null;
 	
 
 	/**
@@ -59,10 +67,10 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 		if (jFrame == null) {
 			jFrame = new JFrame();
 			jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			jFrame.setBounds(new Rectangle(0, 0, 1000, 600));
+			jFrame.setBounds(new Rectangle(0, 0, 1200, 780));
 			jFrame.setJMenuBar(getJJMenuBar());
 			jFrame.setContentPane(getJSplitPane());
-			jFrame.setTitle("Application");
+			jFrame.setTitle("Tarea 1 Grafica");
 		}
 		return jFrame;
 	}
@@ -176,7 +184,8 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 	private JDialog getAboutDialog() {
 		if (aboutDialog == null) {
 			aboutDialog = new JDialog(getJFrame(), true);
-			aboutDialog.setTitle("About");
+			aboutDialog.setTitle("Acreca de...");
+			aboutDialog.setBounds(new Rectangle(0, 0, 200, 200));
 			aboutDialog.setContentPane(getAboutContentPane());
 		}
 		return aboutDialog;
@@ -278,7 +287,7 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 	
 	private BufferedImage getBufferedImage(){
 		if (imagen == null) {
-			imagen = new BufferedImage(800,600,BufferedImage.TYPE_INT_RGB);
+			imagen = new BufferedImage(1200,600,BufferedImage.TYPE_INT_RGB);
 		}
 		return imagen;
 	}
@@ -295,7 +304,6 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 			lienzo = new CanvasPix(imagen, Color.WHITE);
 			ManejadorEventosMouse2D ml = new ManejadorEventosMouse2D(this);
 			lienzo.addMouseListener(ml);
-			jSplitPane.setRightComponent(lienzo);
 		}
 		return lienzo;
 	}
@@ -310,10 +318,11 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 		if (jSplitPane == null) {
 			jSplitPane = new JSplitPane();
 			jSplitPane.setDividerSize(2);
-			jSplitPane.setEnabled(true);
-			jSplitPane.setLeftComponent(getJPanel());
-			jSplitPane.setDividerLocation(200);
-			jSplitPane.setRightComponent(getCanvasPix());
+			jSplitPane.setEnabled(false);
+			jSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+			jSplitPane.setTopComponent(getCanvasPix());
+			jSplitPane.setBottomComponent(getJPanel());
+			jSplitPane.setDividerLocation(600);
 		}
 		return jSplitPane;
 	}
@@ -325,8 +334,19 @@ public class Poligonos_GUI implements InterfazGraficos2D{
 	 */
 	private JPanel getJPanel() {
 		if (jPanel == null) {
+			jLabel1 = new JLabel();
+			jLabel1.setBounds(new Rectangle(219, 10, 106, 16));
+			jLabel1.setText("Tamaño del Lado");
+			jLabel = new JLabel();
+			jLabel.setBounds(new Rectangle(10, 10, 197, 16));
+			jLabel.setText("Poligonos Regulares Predefinidos");
 			jPanel = new JPanel();
-			jPanel.setLayout(new GridBagLayout());
+			jPanel.setLayout(null);
+			jPanel.add(getJComboBox(), null);
+			jPanel.add(jLabel, null);
+			jPanel.add(jLabel1, null);
+			jPanel.add(getJTextField(), null);
+			jPanel.add(getJButton(), null);
 		}
 		return jPanel;
 	}
@@ -548,6 +568,46 @@ public class Poligonos_GUI implements InterfazGraficos2D{
         }
     }
 
+
+	/**
+	 * This method initializes jComboBox	
+	 * 	
+	 * @return javax.swing.JComboBox	
+	 */
+	private JComboBox getJComboBox() {
+		if (jComboBox == null) {
+			jComboBox = new JComboBox();
+			jComboBox.setBounds(new Rectangle(8, 30, 200, 25));
+		}
+		return jComboBox;
+	}
+
+	/**
+	 * This method initializes jTextField	
+	 * 	
+	 * @return javax.swing.JTextField	
+	 */
+	private JTextField getJTextField() {
+		if (jTextField == null) {
+			jTextField = new JTextField();
+			jTextField.setBounds(new Rectangle(220, 32, 105, 25));
+		}
+		return jTextField;
+	}
+
+	/**
+	 * This method initializes jButton	
+	 * 	
+	 * @return javax.swing.JButton	
+	 */
+	private JButton getJButton() {
+		if (jButton == null) {
+			jButton = new JButton();
+			jButton.setBounds(new Rectangle(157, 63, 100, 25));
+			jButton.setText("Dibujar");
+		}
+		return jButton;
+	}
 
 	/**
 	 * Launches this application
