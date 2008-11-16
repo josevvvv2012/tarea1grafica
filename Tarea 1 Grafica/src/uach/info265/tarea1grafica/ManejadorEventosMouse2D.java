@@ -40,10 +40,10 @@ public class ManejadorEventosMouse2D implements MouseListener {
     	}
     	else{
     		if(cont%2==0){
-    			formas.dibujaSegmentoAlgoritmoDos(x0_ant, y0_ant, arg0.getX(), arg0.getY(), false/*aplicarAntiAlias*/);
+    			formas.generaSegmentoRectaBresenham(x0_ant, y0_ant, arg0.getX(), arg0.getY(), false/*aplicarAntiAlias*/);
     		}
     		else{
-    			formas.dibujaSegmentoAlgoritmoUno(x0_ant, y0_ant, arg0.getX(), arg0.getY(), false/*aplicarAntiAlias*/);
+    			formas.generaSegmentoRectaBresenham(x0_ant, y0_ant, arg0.getX(), arg0.getY(), false/*aplicarAntiAlias*/);
     		}
     	}
     	x0_ant = arg0.getX();
