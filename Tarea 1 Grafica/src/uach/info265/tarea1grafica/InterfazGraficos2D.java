@@ -38,19 +38,7 @@ public interface InterfazGraficos2D {
                                       final int x1,
                                       final int y1,
                                       final boolean aplicarAntiAlias);
-
     
-    /*void dibujaSegmentoAlgoritmoUno(final int x0,
-            						final int y0,
-            						final int x1,
-            						final int y1,
-            						final boolean aplicarAntiAlias);
     
-    void dibujaSegmentoAlgoritmoDos(final int x0,
-            						final int y0,
-            						final int x1,
-            						final int y1,
-            						final boolean aplicarAntiAlias);*/
-    
-    void dibujaPoligono(int nlados, float tamanoLado);
+    void dibujaPoligono(int nLados, float tamanoLado);
 }
