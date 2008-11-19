@@ -466,84 +466,6 @@ public class Poligonos_GUI implements InterfazGraficos2D{
         refrescarImagen();
     }
     
-    /*public void dibujaSegmentoAlgoritmoUno(final int x0,
-            final int y0,
-            final int x1,
-            final int y1,
-            final boolean aplicarAntiAlias) {
-    	
-    	//Bresenham
-    	System.out.println("generarRectaBresenham: desde ["
-                + x0 + "," + y0 + "] hasta [" + x1 + "," + y1 + "]");
-    	WritableRaster wr = imagen.getRaster();
-        int[] coloresRGB = new int[3];
-        coloresRGB[0] = 255;
-        ArrayList < int[] > listaPuntos = new ArrayList < int[] >();
-        
-        int a0 = x0;
-        int b0 = y0;
-        int a1 = x1;
-        int b1 = y1;
-        
-        boolean steep;
-        if(Math.abs(b1 - b0) > Math.abs(a1 - a0))
-        	steep = true;
-        else
-        	steep = false;
-        
-        if (steep){
-        	int temp = a0;
-        	a0 = b0;
-        	b0 = temp;
-        	temp = a1;
-        	a1 = b1;
-        	b1 = temp;
-        }
-        if (a0 > a1){
-        	int temp = a0;
-        	a0 = a1;
-        	a1 = temp;
-        	temp = b0;
-        	a0 = b1;
-        	b1 = temp;
-        }
-        int deltax = a1 - a0;
-        int deltay = Math.abs(b1 - b0);
-        int error = deltax / 2;
-        int ystep;
-        int y = b0;
-        if (b0 < b1)
-        	ystep = 1; 
-        else 
-        	ystep = -1;
-        for (int i=a0;i<a1+1;i++){
-            if (steep){
-            	wr.setPixel(y, i, coloresRGB);
-            	int[] punto = new int[2];
-    	        punto[0] = y;
-    	        punto[1] = i;
-    	        listaPuntos.add(punto);
-            }
-            else{
-            	wr.setPixel(i, y, coloresRGB);
-            	int[] punto = new int[2];
-    	        punto[0] = i;
-    	        punto[1] = y;
-    	        listaPuntos.add(punto);
-            }
-            error = error - deltay;
-            if (error < 0){
-                y = y + ystep;
-                error = error + deltax;
-            }
-        }
-        
-        if (aplicarAntiAlias) {
-            aplicarAntialiasSegmento(listaPuntos);
-        }
-        refrescarImagen();	
-    }*/
-    
     
     /**
      * Método para aplicar antialias sobre la imagen de la clase, dada una lista
@@ -583,9 +505,13 @@ public class Poligonos_GUI implements InterfazGraficos2D{
         }
     }
 
-    public void dibujaPoligono(int nlados, float tamanoLado){
+    public void dibujaPoligono(int nLados, float tamanoLado){
     	//TODO 5 implementar el dibujo de poligonos en general.
     	
+    }
+    
+    private void scanLine(final ArrayList<int[]> listaPuntos){
+    	//TODO 6 implementar el scanline para relleno de poligonos
     }
     
     
